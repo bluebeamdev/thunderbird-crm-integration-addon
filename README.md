@@ -46,6 +46,8 @@ Installation
 
 5.  The add-on will now appear in Thunderbird.
 
+6.  Alternatively you can download the .xpi release and use the Install Add-on From File funciton in the Add-ons and Themes area of Thunderbird.
+
 * * * * *
 
 Configuration
