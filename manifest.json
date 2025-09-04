@@ -2,29 +2,39 @@
   "manifest_version": 2,
   "name": "Customer Lookup Integration",
   "version": "1.1.0",
-  "description": "Integration with third party customer management software",
-
+  "description": "Integration with third-party customer management software",
   "applications": {
     "gecko": {
       "id": "bluebeamdev@potzer.org",
       "strict_min_version": "91.0"
     }
   },
-
   "permissions": [
     "menus",
-    "messagesRead",
+    "messagesRead", 
     "tabs",
     "storage"
   ],
-
   "background": {
     "scripts": ["background.js"],
     "persistent": false
   },
-
   "options_ui": {
     "page": "options.html",
     "open_in_tab": true
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "64": "icons/icon-64.png",
+    "128": "icons/icon-128.png"
+  },
+  "message_display_action": {
+    "default_title": "Lookup Customer",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    }
   }
 }
