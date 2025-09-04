@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Customer Lookup Settings</title>
+  <style>
+    body { font-family: sans-serif; margin: 1em; }
+    h2 { margin-bottom: 0.5em; }
+    p.note { background: #f0f0f0; padding: 0.5em; border-left: 4px solid #888; }
+    label { display: block; margin-top: 0.8em; }
+    input, select { width: 100%; padding: 0.3em; }
+    button { margin-top: 1em; padding: 0.5em 1em; }
+    #preview { margin-top: 1em; font-family: monospace; background: #fafafa; padding: 0.5em; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <h2>Customer Lookup Settings</h2>
+
+  <p class="note">
+    Select your CRM system. The URL will be built automatically with the sender’s email address.<br>
+    For custom systems, use <code>emailhere</code> as a placeholder for the email.
+  </p>
+
+  <label>
+    CRM System
+    <select id="crmSystem">
+      <option value="zendesk">Zendesk</option>
+      <option value="sugarcrm">SugarCRM</option>
+      <option value="salesforce_lightning">Salesforce Lightning</option>
+      <option value="salesforce_classic">Salesforce Classic</option>
+      <option value="servicenow">ServiceNow</option>
+      <option value="zoho">Zoho CRM</option>
+      <option value="custom">Custom</option>
+    </select>
+  </label>
+
+  <div id="domainContainer">
+    <label>
+      Domain (e.g. yourcompany)
+      <input type="text" id="domain">
+    </label>
+  </div>
+
+  <div id="customContainer" style="display:none;">
+    <label>
+      Custom URL Template<br>
+      <small>Use <code>emailhere</code> as placeholder for the email.</small>
+      <input type="text" id="customTemplate" placeholder="https://example.com/search?user=emailhere">
+    </label>
+  </div>
+
+  <button id="save">Save</button>
+
+  <h3>Preview</h3>
+  <div id="preview"></div>
+
+  <script src="options.js"></script>
+</body>
+</html>
