@@ -1,81 +1,120 @@
-Customer Lookup Integration (Thunderbird Add-on)
-================================================
+Thunderbird Customer Lookup Add-on
+==================================
 
-A Thunderbird extension that lets you quickly open customer records from your scheduling system.
-
-When you right-click on an email and select **"Lookup Customer in Scheduling System"**, Thunderbird will open a browser tab with a URL containing the sender's email address.\
-This URL can be received by your software listener to load the correct customer information.
+This Thunderbird add-on lets you right-click on an email and instantly open a CRM search page for the sender's email address.\
+It supports multiple CRM systems (Zendesk, SugarCRM, Salesforce, ServiceNow, Zoho) and also allows you to configure a custom URL.
 
 * * * * *
 
-✨ Features
-----------
-
--   Adds a context menu option in the **message list**.
-
--   Extracts the sender's email address automatically.
-
--   Opens a customizable URL (host, port, path) with the `?email=` parameter.
-
--   Settings page with live **preview of the final URL**.
-
--   Defaults to: https://localhost:8583/handle?email=user@example.com
-
-⚙️ Installation (Private Distribution)
---------------------------------------
-
-Since this add-on is not published on Thunderbird Add-ons (ATN), you install it manually:
-
-1.  Download or clone this repository.
-
-2.  Create an `.xpi` file:
-
-cd customer-lookup
-zip -r ../customer-lookup.xpi *
-
-(On Windows: select all files, right-click → **Send to → Compressed (zipped) folder**, then rename `.zip` → `.xpi`).
-
- -   Open Thunderbird → **Add-ons Manager** (`Ctrl+Shift+A`).
-
--   Click the ⚙️ gear icon → **Install Add-on From File...**
-
--   Select `customer-lookup.xpi` and confirm installation.
-
-🔧 Configuration
-----------------
-
-1.  In Thunderbird, open **Add-ons → Extensions → Customer Lookup Integration → Preferences**.
-
-2.  Enter:
-
-    -   **Host** (default: `https://localhost`)
-
-    -   **Port** (default: `8583`)
-
-    -   **Handle path** (default: `/handle`)
-
-3.  As you type, the **Preview URL** will update in real time.
-
-📂 Project Structure
---------------------
-
-customer-lookup/
- ├─ manifest.json      # Add-on manifest
- ├─ background.js      # Main extension logic
- ├─ options.html       # Options (settings) page UI
- └─ options.js         # Settings save/load logic
-
-🚀 Usage
+Features
 --------
 
-1.  Open Thunderbird.
+-   Adds a right-click menu option: **Lookup Customer in Scheduling System**
 
-2.  Right-click any email in the message list.
+-   Extracts the sender's email address automatically
 
-3.  Select **Lookup Customer in Scheduling System**.
+-   Supports multiple CRM presets:
 
-4.  Your default browser will open the configured URL, e.g.:
+    -   **Zendesk**: `https://$domain.zendesk.com/agent/search/1?q=emailhere`
 
-https://localhost:8583/handle?email=test@example.com
+    -   **SugarCRM**: `https://$domain.sugarcrm.com/#search/emailhere`
 
-5.  Your software listener can catch this request and load the customer record.
+    -   **Salesforce Lightning**: `https://$domain.lightning.force.com/one/one.app#emailhere`
+
+    -   **Salesforce Classic**: `https://$domain.salesforce.com/_ui/search/ui/UnifiedSearchResults?searchType=2&str=emailhere`
+
+    -   **ServiceNow**: `https://$domain.service-now.com/nav_to.do?uri=%2Fsys_user_list.do%3Fsysparm_first_row%3D1%26sysparm_query%3DGOTO123TEXTQUERY321%253demailhere%26sysparm_query_encoded%3DGOTO123TEXTQUERY321%253d629510%26sysparm_view%3D`
+
+    -   **Zoho CRM**: `https://crm.zoho.com/crm/$domain/search?searchword=emailhere`
+
+-   **Custom URL** mode: define your own URL template using `emailhere` as the placeholder for the email
+
+-   Live **Preview URL** in the options page
+
+* * * * *
+
+Installation
+------------
+
+1.  Clone or download this repository.
+
+2.  Open Thunderbird → **Add-ons Manager** (`Tools > Add-ons and Themes`).
+
+3.  Click the gear icon → **Debug Add-ons**.
+
+4.  Click **Load Temporary Add-on** and select the `manifest.json` file in this project.
+
+5.  The add-on will now appear in Thunderbird.
+
+* * * * *
+
+Configuration
+-------------
+
+1.  Open the add-on **Options** page.
+
+2.  Select your CRM system from the dropdown:
+
+    -   **Preset CRM (Zendesk, Salesforce, Zoho, etc.)**:\
+        Enter your company **domain** in the domain field (e.g., `yourcompany`).\
+        The add-on inserts it automatically into the template.
+
+    -   **Custom**:\
+        A **Custom URL** text box appears. Paste your full URL here and use `emailhere` where the sender's email should go.\
+        Example: `https://localhost:8583/handle?email=emailhere`
+
+3.  A **Preview URL** updates live as you type, so you can confirm it's correct.
+
+4.  Click **Save** to apply your settings.
+
+* * * * *
+
+Usage
+-----
+
+1.  Right-click an email in Thunderbird's message list.
+
+2.  Select **Lookup Customer in Scheduling System**.
+
+3.  The add-on opens your CRM system (or custom URL) in a new browser tab, with the sender's email automatically inserted.
+
+* * * * *
+
+Examples
+--------
+
+**Preset (Zendesk)**
+
+-   Domain: `mycompany`
+
+-   Sender email: `test@example.com`
+
+-   Resulting URL:\
+    `https://mycompany.zendesk.com/agent/search/1?q=test@example.com`
+
+**Custom URL**
+
+-   Custom template: `https://localhost:8583/handle?email=emailhere`
+
+-   Sender email: `test@example.com`
+
+-   Resulting URL:\
+    `https://localhost:8583/handle?email=test@example.com`
+
+* * * * *
+
+Development
+-----------
+
+-   Modify CRM templates in `background.js` or `options.js`.
+
+-   Reload the add-on in Thunderbird via **Load Temporary Add-on** after making changes.
+
+-   Use the console (`Ctrl+Shift+J`) to see debug logs.
+
+* * * * *
+
+License
+-------
+
+MIT License -- free to use and modify.
