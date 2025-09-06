@@ -10,6 +10,7 @@ Features
 --------
 
 -   Adds a right-click menu option: **Lookup Customer in Scheduling System**
+-   Adds a button in the header area when the email is loaded next to the reply / forward / junk / delete buttons: **Lookup Customer**
 
 -   Extracts the sender's email address automatically
 
